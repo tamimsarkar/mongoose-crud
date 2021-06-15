@@ -1,31 +1,36 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const todoHandler = require('./routes/todoHandler')
+const express = require("express");
+const mongoose = require("mongoose");
+const todoHandler = require("./routeHandler/todoHandler");
+const userHandler = require("./routeHandler/userHandler");
+const dotenv = require('dotenv');
 
+// express app initialization
 const app = express();
 app.use(express.json());
-
-//database connnection
-
-mongoose.connect("mongodb://localhost/todos",{
+dotenv.config();
+// database connection with mongoose
+mongoose
+  .connect("mongodb://localhost/todos", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log(`mongodb connected`))
-.catch(err => console.log(err.message))
-//  app routes
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("connection successful"))
+  .catch((err) => console.log(err));
 
-app.use('/todo', todoHandler)
+// application routes
+app.use("/todo", todoHandler);
+app.use("/user", userHandler);
 
-//  default error handling
-function errorHandler (err, req, res, next){
-    if(res.headerSent){
-        return next(err)
-    }else{
-        res.status(500).json({error: err})
-    }
+// default error handler
+const errorHandler = (err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500).json({ error: err });
 }
 
+app.use(errorHandler)
+
 app.listen(3000, () => {
-    console.log(`app is running on port 3000`)
-})
+  console.log("app listening at port 3000");
+});

@@ -4,16 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js",
-    "lint": "npm i -D eslint prettier npx install-peerdeps --dev eslint-config-airbnb-base npm i -D eslint-config-prettier eslint-plugin-prettier"
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamimsarkar/mongoose-crud.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tamimsarkar/mongoose-crud/issues"
+  },
+  "homepage": "https://github.com/tamimsarkar/mongoose-crud#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.12"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
